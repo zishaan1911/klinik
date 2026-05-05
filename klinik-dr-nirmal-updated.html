@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klinik Dr Nirmal — Kampar, Perak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #F7F3EC; --ivory: #FBF8F3; --sage: #6B7F6A;
+    --deep-sage: #3D4F3C; --forest: #243823; --gold: #B8935A;
+    --warm-gray: #8A8278; --light-green: #E8EDE6; --accent: #C4A882;
+    --glass-bg: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.72);
+    --glass-shadow: 0 8px 32px rgba(36,56,35,0.09);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans','Noto Sans SC',sans-serif; background: var(--ivory); color: var(--forest); overflow-x: hidden; }
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:9999; opacity:0.5; }
+
+  /* SVG ICONS */
+  .icon-svg { display:block; }
+  .icon-svg path, .icon-svg circle, .icon-svg rect, .icon-svg polyline,
+  .icon-svg line, .icon-svg ellipse, .icon-svg polygon {
+    fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .icon-svg.filled path, .icon-svg.filled polygon { fill:currentColor; stroke:none; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 4rem; transition:all 0.4s ease; }
+  nav.scrolled { background:rgba(247,243,236,0.85); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid rgba(180,160,130,0.2); padding:1rem 4rem; }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:500; letter-spacing:0.12em; color:var(--forest); text-transform:uppercase; }
+  nav:not(.scrolled) .nav-logo { color:var(--cream); }
+  .nav-right { display:flex; align-items:center; gap:2rem; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--sage); transition:color 0.3s; font-weight:400; }
+  nav:not(.scrolled) .nav-links a { color:rgba(247,243,236,0.65); }
+  .nav-links a:hover { color:var(--forest); }
+  nav:not(.scrolled) .nav-links a:hover { color:var(--cream); }
+  .nav-cta { background:var(--forest); color:var(--cream)!important; padding:0.6rem 1.4rem; border-radius:100px; transition:background 0.3s!important; }
+  nav:not(.scrolled) .nav-cta { background:var(--accent); color:var(--forest)!important; }
+  .nav-cta:hover { background:var(--deep-sage)!important; color:var(--cream)!important; }
+
+  /* LANG SWITCHER */
+  .lang-switcher { display:flex; align-items:center; gap:2px; border-radius:100px; padding:3px; background:rgba(247,243,236,0.15); }
+  nav.scrolled .lang-switcher { background:rgba(36,56,35,0.1); }
+  .lang-btn { background:none; border:none; cursor:pointer; padding:0.3rem 0.65rem; border-radius:100px; font-size:0.68rem; font-weight:500; letter-spacing:0.06em; color:rgba(247,243,236,0.65); transition:all 0.25s ease; font-family:inherit; }
+  nav.scrolled .lang-btn { color:var(--sage); }
+  .lang-btn.active { background:var(--accent); color:var(--forest); }
+  nav.scrolled .lang-btn.active { background:var(--forest); color:var(--cream); }
+  .lang-btn:hover:not(.active) { color:var(--cream); }
+  nav.scrolled .lang-btn:hover:not(.active) { color:var(--forest); }
+
+  /* HERO */
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden; background:var(--forest); }
+  .hero-bg-orb { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; }
+  .orb1 { width:600px; height:600px; background:radial-gradient(circle,rgba(184,147,90,.25) 0%,transparent 70%); top:-100px; right:-100px; animation:float1 8s ease-in-out infinite; }
+  .orb2 { width:500px; height:500px; background:radial-gradient(circle,rgba(107,127,106,.3) 0%,transparent 70%); bottom:-100px; left:-100px; animation:float2 10s ease-in-out infinite; }
+  .orb3 { width:300px; height:300px; background:radial-gradient(circle,rgba(196,168,130,.15) 0%,transparent 70%); top:40%; left:40%; animation:float1 6s ease-in-out infinite reverse; }
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-30px)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
+
+  .hero-inner { position:relative; z-index:2; padding:0 4rem; max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 260px; gap:4rem; align-items:center; }
+  .hero-eyebrow { font-size:0.72rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--accent); margin-bottom:2rem; opacity:0; animation:fadeUp 0.8s 0.3s forwards; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3.5rem,8vw,7rem); font-weight:300; line-height:1.05; color:var(--cream); letter-spacing:-0.01em; opacity:0; animation:fadeUp 0.9s 0.5s forwards; }
+  .hero-title em { font-style:italic; color:var(--accent); }
+  .hero-subtitle { margin-top:2rem; font-size:1rem; font-weight:300; color:rgba(247,243,236,.6); max-width:440px; line-height:1.7; opacity:0; animation:fadeUp 0.9s 0.7s forwards; }
+  .hero-actions { display:flex; gap:1.2rem; margin-top:3rem; opacity:0; animation:fadeUp 0.9s 0.9s forwards; }
+
+  /* HERO GLASS SIDEBAR */
+  .hero-glass-panel { display:flex; flex-direction:column; gap:1rem; opacity:0; animation:fadeUp 1s 1.0s forwards; }
+  .hero-glass-badge { background:rgba(107,127,106,0.22); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(107,127,106,0.35); border-radius:100px; padding:0.5rem 1rem; display:flex; align-items:center; gap:0.5rem; font-size:0.7rem; color:rgba(247,243,236,0.8); letter-spacing:0.08em; }
+  .hero-glass-badge .dot { width:6px; height:6px; background:#8FC88E; border-radius:50%; animation:pulse 2s infinite; flex-shrink:0; }
+  .hero-glass-card { background:rgba(255,255,255,0.07); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.13); border-radius:18px; padding:1.5rem 1.6rem; }
+  .hero-glass-card .hgc-icon { width:36px; height:36px; background:rgba(196,168,130,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--accent); margin-bottom:0.8rem; }
+  .hero-glass-card .hgc-label { font-size:0.63rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,243,236,0.45); margin-bottom:0.3rem; }
+  .hero-glass-card .hgc-val { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--accent); line-height:1; }
+  .hero-glass-card .hgc-desc { font-size:0.76rem; color:rgba(247,243,236,0.55); margin-top:0.3rem; line-height:1.4; }
+
+  .btn-primary { display:inline-flex; align-items:center; gap:0.6rem; background:var(--accent); color:var(--forest); padding:0.9rem 2rem; border-radius:100px; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:500; text-decoration:none; transition:all 0.3s ease; }
+  .btn-primary:hover { background:var(--gold); transform:translateY(-2px); }
+  .btn-outline { display:inline-flex; align-items:center; gap:0.6rem; border:1px solid rgba(247,243,236,.3); color:var(--cream); padding:0.9rem 2rem; border-radius:100px; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:400; text-decoration:none; transition:all 0.3s ease; }
+  .btn-outline:hover { border-color:rgba(247,243,236,.7); transform:translateY(-2px); }
+  .hero-scroll-line { position:absolute; bottom:3rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; opacity:0; animation:fadeUp 1s 1.4s forwards; }
+  .hero-scroll-line span { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(247,243,236,.4); }
+  .scroll-bar { width:1px; height:50px; background:rgba(247,243,236,.2); position:relative; overflow:hidden; }
+  .scroll-bar::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:var(--accent); animation:scrollDown 2s ease-in-out infinite; }
+  @keyframes scrollDown { 0%{transform:translateY(-100%)} 100%{transform:translateY(100%)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* MARQUEE */
+  .marquee-strip { background:var(--accent); padding:0.85rem 0; overflow:hidden; white-space:nowrap; }
+  .marquee-inner { display:inline-flex; animation:marquee 30s linear infinite; }
+  .marquee-item { font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--forest); font-weight:500; padding:0 2rem; }
+  .marquee-dot { color:var(--forest); opacity:0.5; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* SECTIONS */
+  section { padding:7rem 4rem; }
+  .section-inner { max-width:1200px; margin:0 auto; }
+  .section-label { font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; display:flex; align-items:center; gap:0.8rem; }
+  .section-label::before { content:''; display:block; width:30px; height:1px; background:var(--gold); }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,4vw,3.5rem); font-weight:300; line-height:1.15; color:var(--forest); }
+  .section-title em { font-style:italic; color:var(--sage); }
+
+  /* ABOUT */
+  .about-section { background:var(--cream); position:relative; overflow:hidden; }
+  .about-section::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background:radial-gradient(circle, rgba(184,147,90,.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; margin-top:4rem; }
+  .about-visual { position:relative; padding-bottom:2rem; }
+  .about-card-main { background:var(--forest); border-radius:20px; padding:3rem; color:var(--cream); position:relative; overflow:hidden; }
+  .about-card-main::before { content:''; position:absolute; top:-50px; right:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(184,147,90,.3) 0%,transparent 70%); border-radius:50%; }
+  .about-card-main .big-number { font-family:'Cormorant Garamond',serif; font-size:5rem; font-weight:300; color:var(--accent); line-height:1; }
+  .about-card-main p { font-size:0.9rem; color:rgba(247,243,236,.7); line-height:1.6; margin-top:0.5rem; }
+  .about-card-float { position:absolute; bottom:-30px; right:-30px; background:var(--accent); border-radius:16px; padding:1.5rem 1.8rem; color:var(--forest); font-family:'Cormorant Garamond',serif; }
+  .about-card-float .num { font-size:2.5rem; font-weight:500; line-height:1; }
+  .about-card-float .label { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; }
+  .about-text p { font-size:1.05rem; line-height:1.8; color:var(--warm-gray); margin-bottom:1.5rem; }
+  .about-pills { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:2rem; }
+  .pill { display:inline-flex; align-items:center; gap:0.5rem; background:var(--glass-bg); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid var(--glass-border); color:var(--deep-sage); border-radius:100px; padding:0.45rem 1rem; font-size:0.75rem; letter-spacing:0.04em; font-weight:400; box-shadow:0 2px 8px rgba(36,56,35,0.05); }
+  .pill svg { width:13px; height:13px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; overflow:visible; }
+  .pill svg * { fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* GLASS TRUST STRIP */
+  .trust-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:4rem; }
+  .trust-card { background:var(--glass-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid var(--glass-border); border-radius:16px; padding:1.4rem 1.6rem; display:flex; align-items:center; gap:1rem; box-shadow:var(--glass-shadow); transition:transform 0.3s ease, box-shadow 0.3s ease; }
+  .trust-card:hover { transform:translateY(-3px); box-shadow:0 14px 40px rgba(36,56,35,0.12); }
+  .trust-card-icon { width:42px; height:42px; background:var(--light-green); border-radius:11px; display:flex; align-items:center; justify-content:center; color:var(--deep-sage); flex-shrink:0; }
+  .trust-card-text .tc-title { font-size:0.85rem; font-weight:500; color:var(--forest); }
+  .trust-card-text .tc-sub { font-size:0.73rem; color:var(--warm-gray); margin-top:0.18rem; }
+
+  /* SERVICES */
+  .services-section { background:var(--ivory); }
+  .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; margin-top:4rem; }
+  .service-card { background:var(--cream); border-radius:20px; padding:2rem 1.8rem; position:relative; overflow:hidden; transition:all 0.4s ease; border:1px solid transparent; }
+  .service-card:hover { transform:translateY(-6px); border-color:rgba(184,147,90,.3); box-shadow:0 20px 60px rgba(36,56,35,.08); }
+  .service-card.featured { background:var(--forest); color:var(--cream); grid-row:span 2; }
+  .service-icon { width:46px; height:46px; background:var(--light-green); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1.4rem; color:var(--deep-sage); transition:transform 0.3s; }
+  .service-card:hover .service-icon { transform:scale(1.1); }
+  .service-card.featured .service-icon { background:rgba(184,147,90,.2); color:var(--accent); }
+  .service-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:500; margin-bottom:0.6rem; color:var(--forest); line-height:1.3; }
+  .service-card.featured h3 { color:var(--cream); font-size:1.8rem; }
+  .service-card p { font-size:0.82rem; color:var(--warm-gray); line-height:1.6; }
+  .service-card.featured p { color:rgba(247,243,236,.65); font-size:0.9rem; }
+  .service-tag { position:absolute; top:1.5rem; right:1.5rem; background:var(--light-green); color:var(--deep-sage); border-radius:100px; padding:0.25rem 0.7rem; font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; }
+  .service-card.featured .service-tag { background:rgba(184,147,90,.25); color:var(--accent); }
+
+  /* STATS */
+  .stats-section { background:var(--deep-sage); padding:5rem 4rem; }
+  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; max-width:1200px; margin:0 auto; }
+  .stat-item { text-align:center; padding:2.5rem 1rem; border-right:1px solid rgba(247,243,236,.1); }
+  .stat-item:last-child { border-right:none; }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; color:var(--accent); line-height:1; }
+  .stat-label { font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(247,243,236,.5); margin-top:0.5rem; }
+  .stat-desc { font-size:0.85rem; color:rgba(247,243,236,.35); margin-top:0.3rem; }
+
+  /* INFO */
+  .info-section { background:var(--cream); position:relative; overflow:hidden; }
+  .info-section::after { content:''; position:absolute; bottom:-150px; left:-150px; width:500px; height:500px; background:radial-gradient(circle, rgba(107,127,106,.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:4rem; }
+  .hours-card { background:var(--forest); border-radius:24px; padding:3rem; color:var(--cream); }
+  .hours-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--accent); margin-bottom:2rem; }
+  .hours-row { display:flex; justify-content:space-between; align-items:center; padding:0.9rem 0; border-bottom:1px solid rgba(247,243,236,.1); font-size:0.88rem; }
+  .hours-row:last-child { border-bottom:none; }
+  .hours-day { color:rgba(247,243,236,.6); }
+  .hours-time { color:var(--cream); font-weight:500; }
+  .hours-time.closed { color:rgba(247,243,236,.3); font-weight:400; }
+  .open-badge { display:inline-flex; align-items:center; gap:0.4rem; background:rgba(107,127,106,.3); color:#8FC88E; border-radius:100px; padding:0.3rem 0.8rem; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
+  .open-dot { width:6px; height:6px; background:#8FC88E; border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .contact-info { display:flex; flex-direction:column; gap:1rem; }
+  .contact-item { display:flex; align-items:flex-start; gap:1rem; padding:1.4rem 1.5rem; background:var(--glass-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-border); border-radius:16px; box-shadow:var(--glass-shadow); transition:transform 0.3s; }
+  .contact-item:hover { transform:translateX(6px); }
+  .contact-icon { width:44px; height:44px; background:var(--light-green); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--deep-sage); flex-shrink:0; }
+  .contact-label { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--warm-gray); }
+  .contact-value { font-size:0.95rem; color:var(--forest); font-weight:500; margin-top:0.2rem; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background:var(--ivory); position:relative; overflow:hidden; }
+  .testimonials-section::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; background:radial-gradient(circle, rgba(196,168,130,.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
+  .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:4rem; }
+  .testi-card { background:var(--glass-bg); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border:1px solid var(--glass-border); border-radius:20px; padding:2rem; transition:transform 0.3s; box-shadow:var(--glass-shadow); }
+  .testi-card:hover { transform:translateY(-4px); }
+  .testi-card:nth-child(2) { background:var(--forest); border-color:rgba(255,255,255,0.05); }
+  .testi-stars { display:flex; gap:3px; margin-bottom:1rem; }
+  .testi-stars svg { width:14px; height:14px; }
+  .testi-text { font-family:'Cormorant Garamond',serif; font-size:1.05rem; line-height:1.65; color:var(--forest); margin-bottom:1.5rem; }
+  .testi-card:nth-child(2) .testi-text { color:var(--cream); }
+  .testi-author { display:flex; align-items:center; gap:0.8rem; }
+  .testi-avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:500; background:var(--light-green); color:var(--deep-sage); }
+  .testi-card:nth-child(2) .testi-avatar { background:rgba(184,147,90,.2); color:var(--accent); }
+  .testi-name { font-size:0.85rem; font-weight:500; color:var(--forest); }
+  .testi-card:nth-child(2) .testi-name { color:var(--cream); }
+  .testi-location { font-size:0.72rem; color:var(--warm-gray); }
+  .testi-card:nth-child(2) .testi-location { color:rgba(247,243,236,.5); }
+
+  /* GLASS FEATURE STRIP */
+  .glass-feature-strip { max-width:1200px; margin:3rem auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+  .glass-feat { background:var(--glass-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid var(--glass-border); border-radius:16px; padding:1.5rem; display:flex; gap:1rem; align-items:flex-start; box-shadow:var(--glass-shadow); transition:transform 0.3s; }
+  .glass-feat:hover { transform:translateY(-3px); }
+  .glass-feat-icon { width:38px; height:38px; border-radius:10px; background:var(--light-green); display:flex; align-items:center; justify-content:center; color:var(--deep-sage); flex-shrink:0; }
+  .glass-feat-text .gft-title { font-size:0.85rem; font-weight:500; color:var(--forest); margin-bottom:0.22rem; }
+  .glass-feat-text .gft-sub { font-size:0.74rem; color:var(--warm-gray); line-height:1.45; }
+
+  /* CTA */
+  .cta-band { background:linear-gradient(135deg,var(--forest) 0%,var(--deep-sage) 100%); padding:6rem 4rem; text-align:center; position:relative; overflow:hidden; }
+  .cta-band::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:400px; background:radial-gradient(ellipse,rgba(184,147,90,.15) 0%,transparent 70%); }
+  .cta-inner { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:0; }
+  .cta-glass-row { display:flex; gap:1rem; justify-content:center; margin-bottom:2.5rem; }
+  .cta-mini-card { background:rgba(255,255,255,0.08); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:1rem 1.5rem; text-align:left; }
+  .cta-mini-card .cmc-icon { width:28px; height:28px; color:var(--accent); margin-bottom:0.4rem; }
+  .cta-mini-card .cmc-val { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--accent); line-height:1; }
+  .cta-mini-card .cmc-label { font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(247,243,236,0.45); margin-top:0.2rem; }
+  .cta-band h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); font-weight:300; color:var(--cream); margin-bottom:1rem; }
+  .cta-band p { color:rgba(247,243,236,.6); font-size:1rem; margin-bottom:2.5rem; }
+
+  /* FOOTER */
+  footer { background:var(--forest); padding:4rem 4rem 2rem; color:rgba(247,243,236,.5); }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:4rem; max-width:1200px; margin:0 auto 3rem; }
+  .footer-brand .logo { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--cream); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem; }
+  .footer-brand p { font-size:0.83rem; line-height:1.7; max-width:260px; }
+  .footer-col h4 { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:1.2rem; }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:0.7rem; font-size:0.83rem; }
+  .footer-col a { color:rgba(247,243,236,.5); text-decoration:none; transition:color 0.2s; }
+  .footer-col a:hover { color:var(--cream); }
+  .footer-bottom { max-width:1200px; margin:0 auto; border-top:1px solid rgba(247,243,236,.08); padding-top:1.5rem; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; }
+
+  /* REVEAL */
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.8s ease,transform 0.8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+  .reveal-delay-3 { transition-delay:0.3s; }
+  .reveal-delay-4 { transition-delay:0.4s; }
+
+  /* LANG FADE */
+  body.lang-switching [data-i18n] { opacity:0; transition:opacity 0.18s ease; }
+  [data-i18n] { transition:opacity 0.18s ease; }
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    nav{padding:1rem 1.5rem;} nav.scrolled{padding:0.8rem 1.5rem;}
+    .nav-links{display:none;}
+    section{padding:5rem 2rem;}
+    .hero-inner{padding:0 2rem; grid-template-columns:1fr; gap:2.5rem;}
+    .hero-glass-panel{flex-direction:row; flex-wrap:wrap; gap:0.8rem;}
+    .about-grid,.info-grid{grid-template-columns:1fr;gap:3rem;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .service-card.featured{grid-row:span 1;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .testimonials-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;}
+    .footer-bottom{flex-direction:column;gap:0.5rem;}
+    .stats-section{padding:4rem 2rem;}
+    .cta-band{padding:5rem 2rem;}
+    footer{padding:3rem 2rem 1.5rem;}
+    .trust-strip{grid-template-columns:1fr;}
+    .glass-feature-strip{grid-template-columns:1fr;}
+    .cta-glass-row{flex-wrap:wrap;}
+  }
+  @media(max-width:600px){
+    .services-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .stat-item{border-right:none;border-bottom:1px solid rgba(247,243,236,.1);}
+    .hero-actions{flex-direction:column;}
+    .lang-btn{padding:0.25rem 0.5rem;font-size:0.62rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Klinik Dr Nirmal</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="#info" data-i18n="nav.hours">Hours</a></li>
+      <li><a href="#testimonials" data-i18n="nav.reviews">Reviews</a></li>
+      <li><a href="tel:0143602251" class="nav-cta" data-i18n="nav.call">Call Now</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="bm">BM</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-orb orb1"></div>
+  <div class="hero-bg-orb orb2"></div>
+  <div class="hero-bg-orb orb3"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Kampar, Perak · Since Day One</p>
+      <h1 class="hero-title" data-i18n="hero.title">Caring for<br><em>every life,</em><br>every stage.</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">Comprehensive medical care for women, children, and families — delivered with compassion and precision.</p>
+      <div class="hero-actions">
+        <a href="tel:0143602251" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.79 19.79 0 012 2.38 2 2 0 014 .21h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          <span data-i18n="hero.cta1">Book Appointment</span>
+        </a>
+        <a href="#services" class="btn-outline" data-i18n="hero.cta2">Our Services ↓</a>
+      </div>
+    </div>
+    <div class="hero-glass-panel">
+      <div class="hero-glass-badge">
+        <span class="dot"></span>
+        <span data-i18n="hours.badge">Opens 9:00 AM Daily</span>
+      </div>
+      <div class="hero-glass-card">
+        <div class="hgc-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="11" rx="6" ry="8"/><path d="M12 19v3M8 22h8"/><path d="M6 11a6 6 0 0012 0"/></svg>
+        </div>
+        <div class="hgc-label">Ultrasound</div>
+        <div class="hgc-val">5D</div>
+        <div class="hgc-desc">Real-time live imaging available</div>
+      </div>
+      <div class="hero-glass-card">
+        <div class="hgc-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="hgc-label">Services</div>
+        <div class="hgc-val">8+</div>
+        <div class="hgc-desc">Specialised &amp; general care</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-line">
+    <div class="scroll-bar"></div>
+    <span data-i18n="hero.scroll">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip"><div class="marquee-inner" id="marquee-inner"></div></div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner">
+    <div class="section-label reveal" data-i18n="about.label">About the Clinic</div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="about.title">A trusted name in<br><em>Kampar healthcare</em></h2>
+    <div class="about-grid">
+      <div class="about-visual reveal reveal-delay-2">
+        <div class="about-card-main">
+          <div class="big-number">9am</div>
+          <p data-i18n="about.card1">Opens every day to serve the health needs of our community — from newborns to adults.</p>
+        </div>
+        <div class="about-card-float">
+          <div class="num">8+</div>
+          <div class="label" data-i18n="about.card2label">Specialised Services</div>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-3">
+        <p data-i18n="about.p1">Klinik Dr Nirmal is a comprehensive private clinic located in the heart of Taman Bandar Baru, Kampar. We provide a full spectrum of medical services — from routine health screenings to specialised women's health, paediatric care, and advanced ultrasound imaging.</p>
+        <p data-i18n="about.p2">Our philosophy is simple: every patient deserves attentive, respectful, and expert care. Whether you are expecting a child, managing a chronic condition, or bringing your little one for vaccination, we are here for you.</p>
+        <div class="about-pills">
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-i18n="pill.obgyn">OBGYN &amp; Women's Health</span>
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+            <span data-i18n="pill.paed">Paediatrics</span>
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <span data-i18n="pill.screen">Health Screening</span>
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><path d="M14.5 9.5l1-1a4.243 4.243 0 016 6l-1 1M8.5 14.5l-1 1a4.243 4.243 0 01-6-6l1-1"/><circle cx="12" cy="12" r="2"/></svg>
+            <span data-i18n="pill.vacc">Vaccination</span>
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><path d="M6 3v18M18 3v18M3 9h18M3 15h18"/></svg>
+            <span data-i18n="pill.surgery">Minor Surgery</span>
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 6 8 2 8 2s0 4 4 4c0 0-4 0-4 6h4zM12 12c0-6 4-10 4-10s0 4-4 4c0 0 4 0 4 6h-4z"/></svg>
+            <span data-i18n="pill.fertility">Fertility Care</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GLASS TRUST STRIP -->
+    <div class="trust-strip">
+      <div class="trust-card reveal reveal-delay-1">
+        <div class="trust-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="trust-card-text">
+          <div class="tc-title">Advanced Diagnostics</div>
+          <div class="tc-sub">2D to 5D ultrasound technology on-site</div>
+        </div>
+      </div>
+      <div class="trust-card reveal reveal-delay-2">
+        <div class="trust-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="trust-card-text">
+          <div class="tc-title">Family-Centred Care</div>
+          <div class="tc-sub">Serving women, children &amp; families together</div>
+        </div>
+      </div>
+      <div class="trust-card reveal reveal-delay-3">
+        <div class="trust-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="trust-card-text">
+          <div class="tc-title">Open Every Day</div>
+          <div class="tc-sub">Mon–Sun, 9:00 AM — consistent &amp; reliable</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <div class="section-label reveal" data-i18n="svc.label">What We Offer</div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="svc.title">Comprehensive <em>services</em><br>under one roof</h2>
+    <div class="services-grid">
+      <!-- Featured: Ultrasound -->
+      <div class="service-card featured reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="11" rx="6" ry="8"/><path d="M12 19v3M8 22h8"/><path d="M6 11a6 6 0 0012 0"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.advanced">Advanced</div>
+        <h3 data-i18n="svc.us.title">Ultrasound 2D, 3D, 4D &amp; 5D</h3>
+        <p data-i18n="svc.us.desc">State-of-the-art imaging to monitor your pregnancy and health with remarkable clarity — from structural scans to real-time 5D live views.</p>
+      </div>
+      <!-- Women's Health -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.obgyn">OBGYN</div>
+        <h3 data-i18n="svc.obgyn.title">General Women's Health</h3>
+        <p data-i18n="svc.obgyn.desc">Comprehensive gynaecological care, prenatal consultations, and women's wellness programmes.</p>
+      </div>
+      <!-- Minor Surgery -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.surgery">Surgery</div>
+        <h3 data-i18n="svc.surgery.title">Minor Surgery Clinic</h3>
+        <p data-i18n="svc.surgery.desc">Warts, moles, keloids and cysts — treated safely and effectively in our clinic.</p>
+      </div>
+      <!-- Paediatrics -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.paed">Paediatrics</div>
+        <h3 data-i18n="svc.paed.title">Paediatric Doctor</h3>
+        <p data-i18n="svc.paed.desc">Expert care for infants, toddlers, and children — supporting healthy growth at every milestone.</p>
+      </div>
+      <!-- Vaccination -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 9.5l1-1a4.243 4.243 0 016 6l-1 1M8.5 14.5l-1 1a4.243 4.243 0 01-6-6l1-1"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.prev">Prevention</div>
+        <h3 data-i18n="svc.vacc.title">Children Vaccination</h3>
+        <p data-i18n="svc.vacc.desc">Full vaccination programmes to protect your child from preventable diseases.</p>
+      </div>
+      <!-- Health Screening -->
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.screen">Screening</div>
+        <h3 data-i18n="svc.screen.title">Men &amp; Women Health Screening</h3>
+        <p data-i18n="svc.screen.desc">Thorough health assessments to catch conditions early and keep you at your best.</p>
+      </div>
+      <!-- PCOS -->
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.pcos">PCOS</div>
+        <h3 data-i18n="svc.pcos.title">Weight Loss &amp; PCOS Treatment</h3>
+        <p data-i18n="svc.pcos.desc">Personalised programmes for polycystic ovarian syndrome and weight management.</p>
+      </div>
+      <!-- Fertility -->
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 6 8 2 8 2s0 4 4 4c0 0-4 0-4 6h4zM12 12c0-6 4-10 4-10s0 4-4 4c0 0 4 0 4 6h-4z"/></svg>
+        </div>
+        <div class="service-tag" data-i18n="svc.tag.fertility">Fertility</div>
+        <h3 data-i18n="svc.fertility.title">Infertility Treatment</h3>
+        <p data-i18n="svc.fertility.desc">Compassionate support and medical guidance for couples on their fertility journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-num">8+</div><div class="stat-label" data-i18n="stat.svc.label">Services Offered</div><div class="stat-desc" data-i18n="stat.svc.desc">Specialised &amp; general care</div></div>
+    <div class="stat-item reveal reveal-delay-1"><div class="stat-num">5D</div><div class="stat-label" data-i18n="stat.us.label">Ultrasound Tech</div><div class="stat-desc" data-i18n="stat.us.desc">Latest imaging available</div></div>
+    <div class="stat-item reveal reveal-delay-2"><div class="stat-num">9am</div><div class="stat-label" data-i18n="stat.open.label">Daily Opening</div><div class="stat-desc" data-i18n="stat.open.desc">Consistent &amp; reliable</div></div>
+    <div class="stat-item reveal reveal-delay-3"><div class="stat-num">1</div><div class="stat-label" data-i18n="stat.clinic.label">Dedicated Clinic</div><div class="stat-desc" data-i18n="stat.clinic.desc">Community-first care</div></div>
+  </div>
+</div>
+
+<!-- HOURS & INFO -->
+<section class="info-section" id="info">
+  <div class="section-inner">
+    <div class="section-label reveal" data-i18n="info.label">Find Us</div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="info.title">Hours &amp; <em>contact</em><br>information</h2>
+    <div class="info-grid">
+      <div class="hours-card reveal reveal-delay-2">
+        <div class="open-badge"><span class="open-dot"></span><span data-i18n="hours.badge">Opens 9:00 AM Daily</span></div>
+        <h3 data-i18n="hours.heading">Clinic Hours</h3>
+        <div class="hours-row"><span class="hours-day" data-i18n="hours.mf">Monday — Friday</span><span class="hours-time">9:00 AM – 6:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day" data-i18n="hours.sat">Saturday</span><span class="hours-time">9:00 AM – 2:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day" data-i18n="hours.sun">Sunday</span><span class="hours-time">9:00 AM – 12:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day" data-i18n="hours.ph">Public Holidays</span><span class="hours-time closed" data-i18n="hours.call">Please call ahead</span></div>
+      </div>
+      <div class="contact-info reveal reveal-delay-3">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><div class="contact-label" data-i18n="contact.address.label">Address</div><div class="contact-value">2251, Jalan Batu Sinar, Taman Bandar Baru, 31900 Kampar, Perak</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.79 19.79 0 012 2.38 2 2 0 014 .21h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          </div>
+          <div><div class="contact-label" data-i18n="contact.phone.label">Phone</div><div class="contact-value"><a href="tel:0143602251" style="color:inherit;text-decoration:none;">014-360 2251</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </div>
+          <div><div class="contact-label" data-i18n="contact.social.label">Social Media</div><div class="contact-value"><a href="https://facebook.com" target="_blank" style="color:inherit;text-decoration:none;" data-i18n="contact.social.value">Follow us on Facebook</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          </div>
+          <div><div class="contact-label" data-i18n="contact.location.label">Location</div><div class="contact-value"><a href="https://maps.google.com?q=Klinik+Dr+Nirmal+Kampar" target="_blank" style="color:inherit;text-decoration:none;" data-i18n="contact.directions">Get Directions →</a></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-inner">
+    <div class="section-label reveal" data-i18n="testi.label">Patient Stories</div>
+    <h2 class="section-title reveal reveal-delay-1" data-i18n="testi.title">Words from our<br><em>patients</em></h2>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text" data-i18n="testi.1.text">"The doctor was incredibly thorough and kind during my pregnancy check-ups. The 5D ultrasound was an experience I will never forget — seeing my baby so clearly was magical."</p>
+        <div class="testi-author"><div class="testi-avatar">F</div><div><div class="testi-name">Farah A.</div><div class="testi-location">Kampar, Perak</div></div></div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#C4A882" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#C4A882" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#C4A882" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#C4A882" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#C4A882" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text" data-i18n="testi.2.text">"Brought my daughter here for vaccination and the staff were so gentle and professional. My daughter wasn't scared at all. Highly recommend for children's care."</p>
+        <div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Rajan K.</div><div class="testi-location">Kampar, Perak</div></div></div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="#B8935A" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text" data-i18n="testi.3.text">"After struggling with PCOS for years, Dr Nirmal's treatment plan genuinely changed my life. I finally feel heard, and my health has improved tremendously."</p>
+        <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Siti N.</div><div class="testi-location">Kampar, Perak</div></div></div>
+      </div>
+    </div>
+
+    <!-- GLASS FEATURE STRIP -->
+    <div class="glass-feature-strip">
+      <div class="glass-feat reveal reveal-delay-1">
+        <div class="glass-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="glass-feat-text">
+          <div class="gft-title">Trusted by Families</div>
+          <div class="gft-sub">Serving Kampar patients with care &amp; professionalism since day one</div>
+        </div>
+      </div>
+      <div class="glass-feat reveal reveal-delay-2">
+        <div class="glass-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="glass-feat-text">
+          <div class="gft-title">Prompt &amp; Punctual</div>
+          <div class="gft-sub">Consistent daily hours so you always know when we're open</div>
+        </div>
+      </div>
+      <div class="glass-feat reveal reveal-delay-3">
+        <div class="glass-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <div class="glass-feat-text">
+          <div class="gft-title">Compassionate Approach</div>
+          <div class="gft-sub">Every patient receives attentive, respectful, expert care</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div class="cta-glass-row">
+      <div class="cta-mini-card">
+        <div class="cmc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.79 19.79 0 012 2.38 2 2 0 014 .21h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        </div>
+        <div class="cmc-val" style="font-size:1.1rem;">014-360 2251</div>
+        <div class="cmc-label">Direct Line</div>
+      </div>
+      <div class="cta-mini-card">
+        <div class="cmc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="cmc-val">9am</div>
+        <div class="cmc-label">Open Daily</div>
+      </div>
+      <div class="cta-mini-card">
+        <div class="cmc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="11" rx="6" ry="8"/><path d="M6 11a6 6 0 0012 0"/></svg>
+        </div>
+        <div class="cmc-val">5D</div>
+        <div class="cmc-label">Ultrasound</div>
+      </div>
+    </div>
+    <h2 data-i18n="cta.title">Ready to take care of your health?</h2>
+    <p data-i18n="cta.subtitle">Book an appointment today — we're here for you and your family.</p>
+    <a href="tel:0143602251" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.79 19.79 0 012 2.38 2 2 0 014 .21h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+      <span data-i18n="cta.btn">Call 014-360 2251</span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Klinik Dr Nirmal</div>
+      <p data-i18n="footer.tagline">Providing trusted, comprehensive healthcare to the Kampar community. Your health is our priority.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.services.heading">Services</h4>
+      <ul>
+        <li><a href="#services" data-i18n="svc.us.title">Ultrasound 2D–5D</a></li>
+        <li><a href="#services" data-i18n="svc.obgyn.title">General Women's Health</a></li>
+        <li><a href="#services" data-i18n="svc.paed.title">Paediatric Doctor</a></li>
+        <li><a href="#services" data-i18n="svc.vacc.title">Children Vaccination</a></li>
+        <li><a href="#services" data-i18n="svc.screen.title">Men &amp; Women Health Screening</a></li>
+        <li><a href="#services" data-i18n="svc.fertility.title">Infertility Treatment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.contact.heading">Contact</h4>
+      <ul>
+        <li><a href="tel:0143602251">014-360 2251</a></li>
+        <li><a href="#" data-i18n="footer.facebook">Facebook Page</a></li>
+        <li><a href="https://maps.google.com?q=Klinik+Dr+Nirmal+Kampar" target="_blank" data-i18n="contact.directions">Get Directions</a></li>
+        <li style="font-size:0.78rem;color:rgba(247,243,236,.3);margin-top:0.5rem;">2251, Jalan Batu Sinar<br>Taman Bandar Baru<br>31900 Kampar, Perak</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-i18n="footer.copy">© 2025 Klinik Dr Nirmal. All rights reserved.</span>
+    <span data-i18n="footer.tagline2">Serving Kampar with care ✦</span>
+  </div>
+</footer>
+
+<script>
+const T = {
+  en: {
+    'nav.about':'About','nav.services':'Services','nav.hours':'Hours','nav.reviews':'Reviews','nav.call':'Call Now',
+    'hero.eyebrow':'Kampar, Perak · Since Day One',
+    'hero.title':'Caring for<br><em>every life,</em><br>every stage.',
+    'hero.subtitle':'Comprehensive medical care for women, children, and families — delivered with compassion and precision.',
+    'hero.cta1':'Book Appointment','hero.cta2':'Our Services ↓','hero.scroll':'Scroll',
+    'about.label':'About the Clinic',
+    'about.title':'A trusted name in<br><em>Kampar healthcare</em>',
+    'about.card1':'Opens every day to serve the health needs of our community — from newborns to adults.',
+    'about.card2label':'Specialised Services',
+    'about.p1':"Klinik Dr Nirmal is a comprehensive private clinic located in the heart of Taman Bandar Baru, Kampar. We provide a full spectrum of medical services — from routine health screenings to specialised women's health, paediatric care, and advanced ultrasound imaging.",
+    'about.p2':'Our philosophy is simple: every patient deserves attentive, respectful, and expert care. Whether you are expecting a child, managing a chronic condition, or bringing your little one for vaccination, we are here for you.',
+    'pill.obgyn':"OBGYN &amp; Women's Health",'pill.paed':'Paediatrics','pill.screen':'Health Screening','pill.vacc':'Vaccination','pill.surgery':'Minor Surgery','pill.fertility':'Fertility Care',
+    'svc.label':'What We Offer','svc.title':'Comprehensive <em>services</em><br>under one roof',
+    'svc.tag.advanced':'Advanced','svc.tag.obgyn':'OBGYN','svc.tag.surgery':'Surgery','svc.tag.paed':'Paediatrics','svc.tag.prev':'Prevention','svc.tag.screen':'Screening','svc.tag.pcos':'PCOS','svc.tag.fertility':'Fertility',
+    'svc.us.title':'Ultrasound 2D, 3D, 4D &amp; 5D','svc.us.desc':'State-of-the-art imaging to monitor your pregnancy and health with remarkable clarity — from structural scans to real-time 5D live views.',
+    'svc.obgyn.title':"General Women's Health",'svc.obgyn.desc':'Comprehensive gynaecological care, prenatal consultations, and wellness programmes.',
+    'svc.surgery.title':'Minor Surgery Clinic','svc.surgery.desc':'Warts, moles, keloids and cysts — treated safely and effectively.',
+    'svc.paed.title':'Paediatric Doctor','svc.paed.desc':'Expert care for infants, toddlers, and children — supporting healthy growth at every milestone.',
+    'svc.vacc.title':'Children Vaccination','svc.vacc.desc':'Full vaccination programmes to protect your child from preventable diseases.',
+    'svc.screen.title':'Men &amp; Women Health Screening','svc.screen.desc':'Thorough health assessments to catch conditions early and keep you at your best.',
+    'svc.pcos.title':'Weight Loss &amp; PCOS Treatment','svc.pcos.desc':'Personalised programmes for polycystic ovarian syndrome and weight management.',
+    'svc.fertility.title':'Infertility Treatment','svc.fertility.desc':'Compassionate support and medical guidance for couples on their fertility journey.',
+    'stat.svc.label':'Services Offered','stat.svc.desc':'Specialised &amp; general care','stat.us.label':'Ultrasound Tech','stat.us.desc':'Latest imaging available','stat.open.label':'Daily Opening','stat.open.desc':'Consistent &amp; reliable','stat.clinic.label':'Dedicated Clinic','stat.clinic.desc':'Community-first care',
+    'info.label':'Find Us','info.title':'Hours &amp; <em>contact</em><br>information',
+    'hours.badge':'Opens 9:00 AM Daily','hours.heading':'Clinic Hours','hours.mf':'Monday — Friday','hours.sat':'Saturday','hours.sun':'Sunday','hours.ph':'Public Holidays','hours.call':'Please call ahead',
+    'contact.address.label':'Address','contact.phone.label':'Phone','contact.social.label':'Social Media','contact.social.value':'Follow us on Facebook','contact.location.label':'Location','contact.directions':'Get Directions →',
+    'testi.label':'Patient Stories','testi.title':'Words from our<br><em>patients</em>',
+    'testi.1.text':'"The doctor was incredibly thorough and kind during my pregnancy check-ups. The 5D ultrasound was an experience I will never forget — seeing my baby so clearly was magical."',
+    'testi.2.text':'"Brought my daughter here for vaccination and the staff were so gentle and professional. My daughter wasn\'t scared at all. Highly recommend for children\'s care."',
+    'testi.3.text':'"After struggling with PCOS for years, Dr Nirmal\'s treatment plan genuinely changed my life. I finally feel heard, and my health has improved tremendously."',
+    'cta.title':'Ready to take care of your health?','cta.subtitle':"Book an appointment today — we're here for you and your family.",'cta.btn':'Call 014-360 2251',
+    'footer.tagline':'Providing trusted, comprehensive healthcare to the Kampar community. Your health is our priority.',
+    'footer.services.heading':'Services','footer.contact.heading':'Contact','footer.facebook':'Facebook Page',
+    'footer.copy':'© 2025 Klinik Dr Nirmal. All rights reserved.','footer.tagline2':'Serving Kampar with care ✦',
+    '_marquee':['Ultrasound 2D-5D',"Women's Health (OBGYN)",'Paediatric Doctor','Children Vaccination','Health Screening','Infertility Treatment','Minor Surgery','PCOS Treatment'],
+  },
+  bm: {
+    'nav.about':'Tentang','nav.services':'Perkhidmatan','nav.hours':'Waktu','nav.reviews':'Ulasan','nav.call':'Hubungi',
+    'hero.eyebrow':'Kampar, Perak · Sejak Awal',
+    'hero.title':'Menjaga<br><em>setiap nyawa,</em><br>setiap peringkat.',
+    'hero.subtitle':'Penjagaan perubatan menyeluruh untuk wanita, kanak-kanak, dan keluarga — dengan belas ihsan dan kepakaran.',
+    'hero.cta1':'Buat Temujanji','hero.cta2':'Perkhidmatan Kami ↓','hero.scroll':'Tatal',
+    'about.label':'Tentang Klinik',
+    'about.title':'Nama yang dipercayai dalam<br><em>perubatan Kampar</em>',
+    'about.card1':'Dibuka setiap hari untuk melayani keperluan kesihatan komuniti kami — daripada bayi hingga dewasa.',
+    'about.card2label':'Perkhidmatan Khusus',
+    'about.p1':'Klinik Dr Nirmal adalah klinik swasta komprehensif di Taman Bandar Baru, Kampar. Kami menyediakan pelbagai perkhidmatan perubatan — saringan rutin, kesihatan wanita, pediatrik, dan ultrasound terkini.',
+    'about.p2':'Falsafah kami mudah: setiap pesakit berhak mendapat penjagaan penuh perhatian dan pakar. Sama ada anda mengandung, menguruskan penyakit, atau membawa si kecil untuk vaksinasi — kami sedia untuk anda.',
+    'pill.obgyn':'OBGYN &amp; Kesihatan Wanita','pill.paed':'Pediatrik','pill.screen':'Saringan Kesihatan','pill.vacc':'Vaksinasi','pill.surgery':'Pembedahan Minor','pill.fertility':'Rawatan Kesuburan',
+    'svc.label':'Apa Yang Kami Tawarkan','svc.title':'Perkhidmatan <em>menyeluruh</em><br>di bawah satu bumbung',
+    'svc.tag.advanced':'Canggih','svc.tag.obgyn':'OBGYN','svc.tag.surgery':'Pembedahan','svc.tag.paed':'Pediatrik','svc.tag.prev':'Pencegahan','svc.tag.screen':'Saringan','svc.tag.pcos':'PCOS','svc.tag.fertility':'Kesuburan',
+    'svc.us.title':'Ultrasound 2D, 3D, 4D &amp; 5D','svc.us.desc':'Pengimejan terkini untuk memantau kehamilan dan kesihatan anda — daripada imbasan struktur hingga paparan langsung 5D.',
+    'svc.obgyn.title':'Kesihatan Wanita Am','svc.obgyn.desc':'Penjagaan ginekologi menyeluruh, konsultasi pranatal, dan program kesejahteraan wanita.',
+    'svc.surgery.title':'Klinik Pembedahan Minor','svc.surgery.desc':'Ketuat, tahi lalat, keloid dan sista — dirawat dengan selamat dan berkesan.',
+    'svc.paed.title':'Doktor Pediatrik','svc.paed.desc':'Penjagaan pakar untuk bayi dan kanak-kanak — menyokong pertumbuhan sihat di setiap peringkat.',
+    'svc.vacc.title':'Vaksinasi Kanak-Kanak','svc.vacc.desc':'Program vaksinasi lengkap untuk melindungi anak anda daripada penyakit boleh dicegah.',
+    'svc.screen.title':'Saringan Kesihatan Lelaki &amp; Wanita','svc.screen.desc':'Penilaian kesihatan menyeluruh untuk mengesan keadaan awal dan memastikan anda dalam keadaan terbaik.',
+    'svc.pcos.title':'Rawatan Penurunan Berat &amp; PCOS','svc.pcos.desc':'Program peribadi untuk sindrom ovari polikistik dan pengurusan berat badan.',
+    'svc.fertility.title':'Rawatan Infertiliti','svc.fertility.desc':'Sokongan penuh belas kasih dan panduan perubatan untuk pasangan dalam perjalanan kesuburan.',
+    'stat.svc.label':'Perkhidmatan Ditawarkan','stat.svc.desc':'Penjagaan khusus &amp; umum','stat.us.label':'Teknologi Ultrasound','stat.us.desc':'Pengimejan terkini tersedia','stat.open.label':'Waktu Buka Harian','stat.open.desc':'Konsisten &amp; boleh dipercayai','stat.clinic.label':'Klinik Berdedikasi','stat.clinic.desc':'Utamakan komuniti',
+    'info.label':'Cari Kami','info.title':'Waktu &amp; <em>maklumat</em><br>hubungi',
+    'hours.badge':'Buka 9:00 PG Setiap Hari','hours.heading':'Waktu Klinik','hours.mf':'Isnin — Jumaat','hours.sat':'Sabtu','hours.sun':'Ahad','hours.ph':'Cuti Umum','hours.call':'Sila hubungi terlebih dahulu',
+    'contact.address.label':'Alamat','contact.phone.label':'Telefon','contact.social.label':'Media Sosial','contact.social.value':'Ikuti kami di Facebook','contact.location.label':'Lokasi','contact.directions':'Dapatkan Arah →',
+    'testi.label':'Cerita Pesakit','testi.title':'Kata-kata daripada<br><em>pesakit kami</em>',
+    'testi.1.text':'"Doktor sangat teliti dan baik hati semasa pemeriksaan kehamilan saya. Ultrasound 5D adalah pengalaman yang tidak akan saya lupakan — melihat bayi saya dengan begitu jelas adalah ajaib."',
+    'testi.2.text':'"Saya membawa anak perempuan saya untuk vaksinasi dan kakitangan sangat lembut dan profesional. Anak saya tidak takut langsung. Sangat disyorkan untuk penjagaan kanak-kanak."',
+    'testi.3.text':'"Selepas berjuang dengan PCOS bertahun-tahun, pelan rawatan Dr Nirmal benar-benar mengubah hidup saya. Saya akhirnya berasa didengari, dan kesihatan saya telah bertambah baik."',
+    'cta.title':'Bersedia untuk menjaga kesihatan anda?','cta.subtitle':'Buat temujanji hari ini — kami sedia untuk anda dan keluarga.','cta.btn':'Hubungi 014-360 2251',
+    'footer.tagline':'Menyediakan penjagaan kesihatan yang dipercayai kepada komuniti Kampar. Kesihatan anda adalah keutamaan kami.',
+    'footer.services.heading':'Perkhidmatan','footer.contact.heading':'Hubungi','footer.facebook':'Halaman Facebook',
+    'footer.copy':'© 2025 Klinik Dr Nirmal. Hak cipta terpelihara.','footer.tagline2':'Berkhidmat untuk Kampar dengan penuh kasih ✦',
+    '_marquee':['Ultrasound 2D-5D','Kesihatan Wanita (OBGYN)','Doktor Pediatrik','Vaksinasi Kanak-Kanak','Saringan Kesihatan','Rawatan Infertiliti','Pembedahan Minor','Rawatan PCOS'],
+  },
+  zh: {
+    'nav.about':'关于我们','nav.services':'医疗服务','nav.hours':'营业时间','nav.reviews':'患者评价','nav.call':'立即致电',
+    'hero.eyebrow':'霹雳州金宝市 · 值得信赖的医疗伙伴',
+    'hero.title':'守护<br><em>每一个生命，</em><br>每一个阶段。',
+    'hero.subtitle':'为女性、儿童及家庭提供全面的医疗护理，以专业与关怀并重的态度服务每一位患者。',
+    'hero.cta1':'预约就诊','hero.cta2':'我们的服务 ↓','hero.scroll':'向下滑动',
+    'about.label':'关于诊所',
+    'about.title':'金宝市值得信赖的<br><em>医疗诊所</em>',
+    'about.card1':'每天准时开诊，为社区居民提供全面的健康服务——从新生儿到成年人，一应俱全。',
+    'about.card2label':'专科服务',
+    'about.p1':'Klinik Dr Nirmal 是一家综合性私人诊所，坐落于金宝市 Taman Bandar Baru 的核心地带。我们提供全面的医疗服务，涵盖常规健康筛查、女性健康专科、儿科护理及先进超声波检查。',
+    'about.p2':'我们的理念简单：每位患者都值得获得细心、尊重且专业的医疗护理。无论您是准妈妈、慢性病患者，还是带小孩接种疫苗，我们都随时在您身边。',
+    'pill.obgyn':'妇科与女性健康','pill.paed':'儿科','pill.screen':'健康筛查','pill.vacc':'疫苗接种','pill.surgery':'小型手术','pill.fertility':'生育治疗',
+    'svc.label':'我们的服务','svc.title':'全面的<em>医疗服务</em><br>一站式诊所',
+    'svc.tag.advanced':'先进技术','svc.tag.obgyn':'妇科','svc.tag.surgery':'外科','svc.tag.paed':'儿科','svc.tag.prev':'预防','svc.tag.screen':'筛查','svc.tag.pcos':'多囊卵巢','svc.tag.fertility':'生育',
+    'svc.us.title':'2D、3D、4D 及 5D 超声波','svc.us.desc':'采用最先进的超声波影像技术，清晰监测您的孕期健康——从结构扫描到实时 5D 动态影像，尽显每个珍贵瞬间。',
+    'svc.obgyn.title':'女性健康（妇产科）','svc.obgyn.desc':'全面的妇科护理、产前咨询及女性健康计划。',
+    'svc.surgery.title':'小型手术诊所','svc.surgery.desc':'疣、痣、疤痕疙瘩及囊肿——在本诊所安全有效地治疗。',
+    'svc.paed.title':'儿科医生','svc.paed.desc':'为婴儿、幼儿及儿童提供专业护理，支持每个成长阶段的健康发展。',
+    'svc.vacc.title':'儿童疫苗接种','svc.vacc.desc':'完整的疫苗接种计划，保护您的孩子免受可预防疾病的侵害。',
+    'svc.screen.title':'男女健康筛查','svc.screen.desc':'全面的健康评估，及早发现潜在状况，让您保持最佳健康状态。',
+    'svc.pcos.title':'体重管理与多囊卵巢综合征治疗','svc.pcos.desc':'个性化的多囊卵巢综合征治疗方案及体重管理计划。',
+    'svc.fertility.title':'不孕不育治疗','svc.fertility.desc':'为备孕夫妇提供富有同理心的支持与专业医疗指导。',
+    'stat.svc.label':'医疗服务','stat.svc.desc':'专科与全科护理','stat.us.label':'超声波技术','stat.us.desc':'最新影像设备','stat.open.label':'每日开诊','stat.open.desc':'准时可靠','stat.clinic.label':'专属诊所','stat.clinic.desc':'以社区为本',
+    'info.label':'联系我们','info.title':'营业时间与<em>联系</em><br>方式',
+    'hours.badge':'每天上午 9:00 开诊','hours.heading':'诊所营业时间','hours.mf':'星期一 — 星期五','hours.sat':'星期六','hours.sun':'星期日','hours.ph':'公共假期','hours.call':'请提前致电确认',
+    'contact.address.label':'地址','contact.phone.label':'电话','contact.social.label':'社交媒体','contact.social.value':'关注我们的 Facebook 主页','contact.location.label':'位置','contact.directions':'获取路线 →',
+    'testi.label':'患者心声','testi.title':'来自<em>患者</em>的<br>真实评价',
+    'testi.1.text':'"医生在我的产检过程中非常细心和亲切。5D 超声波的体验令我终生难忘——如此清晰地看到我的宝宝，真的太神奇了。"',
+    'testi.2.text':'"我带女儿来接种疫苗，医护人员非常温柔和专业。我的女儿完全不害怕。强烈推荐用于儿童护理。"',
+    'testi.3.text':'"与多囊卵巢综合征抗争多年后，Dr Nirmal 的治疗方案真正改变了我的生活。我终于感到被重视，健康状况也大幅改善了。"',
+    'cta.title':'准备好照顾您的健康了吗？','cta.subtitle':'今天就预约就诊——我们随时为您和您的家人服务。','cta.btn':'致电 014-360 2251',
+    'footer.tagline':'为金宝市社区提供值得信赖的全面医疗服务。您的健康是我们的首要任务。',
+    'footer.services.heading':'医疗服务','footer.contact.heading':'联系方式','footer.facebook':'Facebook 主页',
+    'footer.copy':'© 2025 Klinik Dr Nirmal。版权所有。','footer.tagline2':'用心守护金宝市健康 ✦',
+    '_marquee':['2D-5D超声波','女性健康（妇科）','儿科医生','儿童疫苗接种','健康筛查','不孕不育治疗','小型手术','多囊卵巢综合征治疗'],
+  }
+};
+
+function buildMarquee(lang) {
+  const items = T[lang]._marquee;
+  const doubled = [...items, ...items];
+  return doubled.map((item,i) =>
+    `<span class="marquee-item">${item}</span>${i < doubled.length-1 ? '<span class="marquee-item marquee-dot">✦</span>' : ''}`
+  ).join('');
+}
+
+let currentLang = 'en';
+
+function applyLang(lang) {
+  document.body.classList.add('lang-switching');
+  setTimeout(() => {
+    const t = T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.getElementById('marquee-inner').innerHTML = buildMarquee(lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang === 'bm' ? 'ms' : 'en';
+    setTimeout(() => document.body.classList.remove('lang-switching'), 20);
+  }, 180);
+}
+
+document.getElementById('marquee-inner').innerHTML = buildMarquee('en');
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.getAttribute('data-lang');
+    if (lang === currentLang) return;
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyLang(lang);
+  });
+});
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
